@@ -2,13 +2,12 @@ package baseball;
 
 public class Game {
     // TODO: 필드가 많다.
-    public static final int GAME_LENGTH = 3;
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 9;
-    public static final String SPLIT_REGEX = "";
-    public static final String OUT_OF_RANGE_STR = "range should be 1-9, input: [%s]";
-    public static final String INVALID_LENGTH_STR = "length should be 3, input: [%d]";
-    public static final String NUMBER_SPLIT_REGEX = "";
+    private static final int GAME_LENGTH = 3;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 9;
+    private static final String OUT_OF_RANGE_STR = "range should be 1-9, input: [%s]";
+    private static final String INVALID_LENGTH_STR = "length should be 3, input: [%d]";
+    private static final String NUMBER_SPLIT_REGEX = "";
     private final String numbers;
 
     private Game(String numbers) {
@@ -26,7 +25,7 @@ public class Game {
     }
 
     private static void validateRange(String str) {
-        String[] split = str.split(SPLIT_REGEX);
+        String[] split = str.split(NUMBER_SPLIT_REGEX);
         for (String s : split) {
             int number = Integer.parseInt(s);
             if (isOutOfRange(number)) {
