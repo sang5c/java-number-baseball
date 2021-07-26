@@ -17,16 +17,20 @@ public class GameTest {
     @DisplayName("세자리가 아니면 에러")
     @Test
     void invalidGameLength() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Game.of("1234"));
-        assertThatIllegalArgumentException().isThrownBy(() -> Game.of("23"));
+        assertIllegalArgumentException("1234");
+        assertIllegalArgumentException("23");
     }
     
     @DisplayName("숫자, 범위는 1~9")
     @Test
     void invalidNumber() {
-        assertThatIllegalArgumentException().isThrownBy(() -> Game.of("023"));
-        assertThatIllegalArgumentException().isThrownBy(() -> Game.of("12#"));
-        assertThatIllegalArgumentException().isThrownBy(() -> Game.of("1A3"));
+        assertIllegalArgumentException("023");
+        assertIllegalArgumentException("12#");
+        assertIllegalArgumentException("1A3");
+    }
+
+    private void assertIllegalArgumentException(String str) {
+        assertThatIllegalArgumentException().isThrownBy(() -> Game.of(str));
     }
 
     @DisplayName("숫자가 일치하지 않으면 nothing")
