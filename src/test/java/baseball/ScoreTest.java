@@ -29,4 +29,11 @@ class ScoreTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Score(-1, 0));
     }
 
+    @DisplayName("볼은 0-3 숫자가 아니면 Exception이 발생한다.")
+    @Test
+    void ballNumberRangeZeroToThree() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Score( 0, 4));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Score(0, -1));
+    }
+
 }
