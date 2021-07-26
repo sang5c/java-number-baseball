@@ -3,8 +3,7 @@ package baseball;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class GameTest {
 
@@ -19,6 +18,14 @@ public class GameTest {
     @Test
     void invalidGameLength() {
         assertThatIllegalArgumentException().isThrownBy(() -> Game.of("1234"));
+    }
+    
+    @DisplayName("숫자, 범위는 1~9")
+    @Test
+    void invalidNumber() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Game.of("023"));
+        assertThatIllegalArgumentException().isThrownBy(() -> Game.of("12#"));
+        assertThatIllegalArgumentException().isThrownBy(() -> Game.of("1A3"));
     }
 
 }
