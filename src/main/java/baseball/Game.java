@@ -46,4 +46,8 @@ public class Game {
         return str.length() != GAME_LENGTH;
     }
 
+    public String compare(String s) {
+        return s;
+    }
+
 }

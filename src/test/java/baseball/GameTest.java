@@ -29,4 +29,12 @@ public class GameTest {
         assertThatIllegalArgumentException().isThrownBy(() -> Game.of("1A3"));
     }
 
+    @DisplayName("숫자가 일치하지 않으면 nothing")
+    @Test
+    void nothing() {
+        Game game = Game.of("123");
+        String result = game.compare("456");
+        assertThat(result).isEqualTo("nothing");
+    }
+
 }
