@@ -24,7 +24,7 @@ public class Number {
     }
 
     public Judgment compare(Number target) {
-        return Judgment.STRIKE;
+        return this.equals(target) ? Judgment.STRIKE : Judgment.BALL;
     }
 
     @Override

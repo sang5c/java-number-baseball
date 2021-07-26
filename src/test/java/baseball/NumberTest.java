@@ -49,5 +49,4 @@ public class NumberTest {
         Number number = Number.of("1", 0);
         assertThat(number.compare(Number.of("1", 1))).isEqualTo(Judgment.BALL);
     }
-
 }
