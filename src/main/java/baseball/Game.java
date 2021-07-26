@@ -7,10 +7,10 @@ public class Game {
     public static final String SPLIT_REGEX = "";
     public static final String OUT_OF_RANGE_STR = "range should be 1-9, input: [%s]";
     public static final String INVALID_LENGTH_STR = "length should be 3, input: [%d]";
-    private final String str;
+    private final String numbers;
 
-    private Game(String str) {
-        this.str = str;
+    private Game(String numbers) {
+        this.numbers = numbers;
     }
 
     public static Game of(String str) {
@@ -46,8 +46,19 @@ public class Game {
         return str.length() != GAME_LENGTH;
     }
 
-    public Score compare(String s) {
-        return new Score(0, 0);
+    public Score compare(String targetNumbers) {
+        int strike = 0;
+
+        String[] source = this.numbers.split("");
+        for (int i = 0; i < source.length; i++) {
+            String[] target = targetNumbers.split("");
+            for (int k = 0; k < target.length; k++) {
+                if (i == k && source[i].equals(target[k])) {
+                    strike++;
+                }
+            }
+        }
+        return new Score(strike, 0);
     }
 
 }
