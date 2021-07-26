@@ -24,7 +24,12 @@ public class Number {
     }
 
     public Judgment compare(Number target) {
-        return this.equals(target) ? Judgment.STRIKE : Judgment.BALL;
+        if (this.equals(target)) {
+            return Judgment.STRIKE;
+        }
+        if (this.number == target.number)
+            return Judgment.BALL;
+        return Judgment.NOTHING;
     }
 
     @Override
