@@ -9,6 +9,7 @@ public class Number {
     }
 
     public static Number of(String str) {
-        return null;
+        int number = Integer.parseInt(str);
+        return new Number(number);
     }
 }
