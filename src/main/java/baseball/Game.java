@@ -27,7 +27,7 @@ public class Game {
         List<Number> numbers = new ArrayList<>();
         String[] split = str.split(NUMBER_SPLIT_REGEX);
         for (String s : split) {
-            numbers.add(Number.of(s));
+            numbers.add(Number.of(s, 0));
         }
         return Collections.unmodifiableList(numbers);
     }
@@ -63,6 +63,7 @@ public class Game {
     private boolean isBall(Number source, int i, Number target, int k) {
         return !samePosition(i, k) && sameValue(source, target);
     }
+
     private boolean sameValue(Number source, Number target) {
         return source.equals(target);
     }

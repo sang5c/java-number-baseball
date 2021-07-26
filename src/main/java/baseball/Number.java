@@ -8,17 +8,19 @@ public class Number {
     private static final String OUT_OF_RANGE_STR = "range should be 1-9, input: [%d]";
 
     private final int number;
+    private final int position;
 
-    private Number(int number) {
+    private Number(int number, int position) {
         this.number = number;
+        this.position = position;
     }
 
-    public static Number of(String str) {
+    public static Number of(String str, int position) {
         int number = Integer.parseInt(str);
         if (number > MAX_NUMBER || number < MIN_NUMBER) {
             throw new IllegalArgumentException(String.format(OUT_OF_RANGE_STR, number));
         }
-        return new Number(number);
+        return new Number(number, position);
     }
 
     @Override
@@ -26,12 +28,12 @@ public class Number {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Number number1 = (Number) o;
-        return number == number1.number;
+        return number == number1.number && position == number1.position;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(number, position);
     }
 
 }
