@@ -43,4 +43,11 @@ public class NumberTest {
         assertThat(number.compare(Number.of("1", 0))).isEqualTo(Judgment.STRIKE);
     }
 
+    @DisplayName("비교시 숫자가 같고 포지션이 다르면 BALL을 반환한다.")
+    @Test
+    void compareReturnBall() {
+        Number number = Number.of("1", 0);
+        assertThat(number.compare(Number.of("1", 1))).isEqualTo(Judgment.BALL);
+    }
+
 }
