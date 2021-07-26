@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class ScoreTest {
 
@@ -19,6 +20,13 @@ class ScoreTest {
     void equalsAndHashcode() {
         Score score = new Score(1, 2);
         assertThat(score).isEqualTo(new Score(1, 2));
+    }
+
+    @DisplayName("스트라이크는 0-3 숫자가 아니면 Exception이 발생한다.")
+    @Test
+    void strikeNumberRangeZeroToThree() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Score(4, 0));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Score(-1, 0));
     }
 
 }
