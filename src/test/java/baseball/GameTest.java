@@ -51,4 +51,13 @@ public class GameTest {
         assertThat(game.compare("425")).isEqualTo(new Score(1, 0));
     }
 
+    @DisplayName("숫자가 일치하고 자리가 일치하지 않으면 ball")
+    @Test
+    void sameNumberAndDiffPositionIsBall() {
+        Game game = of("123");
+        assertThat(game.compare("312")).isEqualTo(new Score(0, 3));
+        assertThat(game.compare("241")).isEqualTo(new Score(0, 2));
+        assertThat(game.compare("435")).isEqualTo(new Score(0, 1));
+    }
+
 }
