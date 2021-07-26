@@ -18,6 +18,7 @@ public class GameTest {
     @Test
     void invalidGameLength() {
         assertThatIllegalArgumentException().isThrownBy(() -> Game.of("1234"));
+        assertThatIllegalArgumentException().isThrownBy(() -> Game.of("23"));
     }
     
     @DisplayName("숫자, 범위는 1~9")
