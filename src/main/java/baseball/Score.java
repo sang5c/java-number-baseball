@@ -7,8 +7,12 @@ public class Score {
     private int ball;
 
     public Score(int strike, int ball) {
-        if (strike > 3 || strike < 0)
-            throw new IllegalArgumentException(String.format("stirke range 0-3, input: [%d]", strike));
+        if (strike > 3 || strike < 0) {
+            throw new IllegalArgumentException(String.format("strike range 0-3, input: [%d]", strike));
+        }
+        if (ball > 3 || ball < 0) {
+            throw new IllegalArgumentException(String.format("ball range 0-3, input: [%d]", strike));
+        }
         this.strike = strike;
         this.ball = ball;
     }
