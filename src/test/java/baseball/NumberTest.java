@@ -22,4 +22,10 @@ public class NumberTest {
         assertThatIllegalArgumentException().isThrownBy(() -> Number.of("#"));
         assertThatIllegalArgumentException().isThrownBy(() -> Number.of("10"));
     }
+
+    @DisplayName("숫자가 같다면 같은 객체를 반환한다.")
+    @Test
+    void equalsAndHashcode() {
+        assertThat(Number.of("1")).isEqualTo(Number.of("1"));
+    }
 }
