@@ -22,6 +22,30 @@ class ScoreTest {
         assertThat(score).isEqualTo(new Score(1, 2));
     }
 
+    @DisplayName("STRIKE를 받으면 스트라이크 카운트가 증가한다.")
+    @Test
+    void increaseStrikeCount() {
+        Score score = new Score(0, 1);
+        score = score.increaseCount(Judgment.STRIKE);
+        assertThat(score).isEqualTo(new Score(1, 1));
+    }
+
+    @DisplayName("BALL을 받으면 볼 카운트가 증가한다.")
+    @Test
+    void increaseBallCount() {
+        Score score = new Score(0, 1);
+        score = score.increaseCount(Judgment.BALL);
+        assertThat(score).isEqualTo(new Score(0, 2));
+    }
+
+    @DisplayName("NOTHING을 받으면 카운트가 증가하지 않는다.")
+    @Test
+    void notIncreaseCount() {
+        Score score = new Score(0, 1);
+        score = score.increaseCount(Judgment.NOTHING);
+        assertThat(score).isEqualTo(new Score(0, 1));
+    }
+
     @DisplayName("스트라이크는 0-3 숫자가 아니면 Exception이 발생한다.")
     @Test
     void strikeNumberRangeZeroToThree() {
