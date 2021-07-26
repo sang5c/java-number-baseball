@@ -25,15 +25,19 @@ class ScoreTest {
     @DisplayName("스트라이크는 0-3 숫자가 아니면 Exception이 발생한다.")
     @Test
     void strikeNumberRangeZeroToThree() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Score(4, 0));
-        assertThatIllegalArgumentException().isThrownBy(() -> new Score(-1, 0));
+        assertIllegalArgumentException(4, 0);
+        assertIllegalArgumentException(-1, 0);
     }
 
     @DisplayName("볼은 0-3 숫자가 아니면 Exception이 발생한다.")
     @Test
     void ballNumberRangeZeroToThree() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Score( 0, 4));
-        assertThatIllegalArgumentException().isThrownBy(() -> new Score(0, -1));
+        assertIllegalArgumentException(0, 4);
+        assertIllegalArgumentException(0, -1);
+    }
+
+    private void assertIllegalArgumentException(int strike, int ball) {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Score(strike, ball));
     }
 
 }

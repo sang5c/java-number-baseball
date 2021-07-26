@@ -3,18 +3,26 @@ package baseball;
 import java.util.Objects;
 
 public class Score {
+    public static final int MIN_STRIKE_AND_BALL = 0;
+    public static final int MAX_STRIKE_AND_BALL = 3;
+    public static final String STRIKE_BALL_RANGE_EXCEPTION_STR = "strike, ball range 0-3, input: [%d, %d]";
     private int strike;
     private int ball;
 
     public Score(int strike, int ball) {
-        if (strike > 3 || strike < 0) {
-            throw new IllegalArgumentException(String.format("strike range 0-3, input: [%d]", strike));
-        }
-        if (ball > 3 || ball < 0) {
-            throw new IllegalArgumentException(String.format("ball range 0-3, input: [%d]", strike));
-        }
+        validateStrikeAndBall(strike, ball);
         this.strike = strike;
         this.ball = ball;
+    }
+
+    private void validateStrikeAndBall(int strike, int ball) {
+        if (isValidRange(strike) || isValidRange(ball)) {
+            throw new IllegalArgumentException(String.format(STRIKE_BALL_RANGE_EXCEPTION_STR, strike, ball));
+        }
+    }
+
+    private boolean isValidRange(int value) {
+        return value > MAX_STRIKE_AND_BALL || value < MIN_STRIKE_AND_BALL;
     }
 
     @Override
