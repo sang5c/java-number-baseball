@@ -46,8 +46,8 @@ public class Game {
         return str.length() != GAME_LENGTH;
     }
 
-    public String compare(String s) {
-        return "nothing";
+    public Score compare(String s) {
+        return new Score(0, 0);
     }
 
 }

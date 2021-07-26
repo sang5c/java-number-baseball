@@ -3,6 +3,7 @@ package baseball;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static baseball.Game.of;
 import static org.assertj.core.api.Assertions.*;
 
 public class GameTest {
@@ -10,7 +11,7 @@ public class GameTest {
     @DisplayName("세자리 숫자를 받아 게임을 생성")
     @Test
     public void createGame() {
-        Game game = Game.of("123");
+        Game game = of("123");
         assertThat(game).isNotNull();
     }
 
@@ -30,15 +31,15 @@ public class GameTest {
     }
 
     private void assertIllegalArgumentException(String str) {
-        assertThatIllegalArgumentException().isThrownBy(() -> Game.of(str));
+        assertThatIllegalArgumentException().isThrownBy(() -> of(str));
     }
 
     @DisplayName("숫자가 일치하지 않으면 nothing")
     @Test
     void nothing() {
-        Game game = Game.of("123");
-        String result = game.compare("456");
-        assertThat(result).isEqualTo("nothing");
+        Game game = of("123");
+        Score score = game.compare("456");
+        assertThat(score).isEqualTo(new Score(0, 0));
     }
 
 }
