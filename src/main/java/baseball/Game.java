@@ -1,8 +1,14 @@
 package baseball;
 
 public class Game {
-    public static Game of(String s) {
-        return null;
+    private String str;
+
+    public Game(String str) {
+        this.str = str;
+    }
+
+    public static Game of(String str) {
+        return new Game(str);
     }
 
 }
