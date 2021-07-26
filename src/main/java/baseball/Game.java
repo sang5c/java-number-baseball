@@ -48,6 +48,7 @@ public class Game {
 
     public Score compare(String targetNumbers) {
         int strike = 0;
+        int ball = 0;
 
         String[] source = this.numbers.split("");
         for (int i = 0; i < source.length; i++) {
@@ -56,9 +57,12 @@ public class Game {
                 if (i == k && source[i].equals(target[k])) {
                     strike++;
                 }
+                if (i != k && source[i].equals(target[k])) {
+                    ball++;
+                }
             }
         }
-        return new Score(strike, 0);
+        return new Score(strike, ball);
     }
 
 }
