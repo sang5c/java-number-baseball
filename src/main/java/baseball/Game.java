@@ -47,7 +47,7 @@ public class Game {
     }
 
     public String compare(String s) {
-        return s;
+        return "nothing";
     }
 
 }
