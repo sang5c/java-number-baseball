@@ -42,4 +42,13 @@ public class GameTest {
         assertThat(score).isEqualTo(new Score(0, 0));
     }
 
+    @DisplayName("숫자와 자리가 일치하면 strike")
+    @Test
+    void sameNumberAndSamePositionIsStrike() {
+        Game game = of("123");
+        assertThat(game.compare("123")).isEqualTo(new Score(3, 0));
+        assertThat(game.compare("143")).isEqualTo(new Score(2, 0));
+        assertThat(game.compare("425")).isEqualTo(new Score(1, 0));
+    }
+
 }
