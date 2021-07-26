@@ -1,6 +1,7 @@
 package baseball;
 
 public class Game {
+    public static final int GAME_LENGTH = 3;
     private String str;
 
     public Game(String str) {
@@ -8,10 +9,17 @@ public class Game {
     }
 
     public static Game of(String str) {
-        if (str.length() != 3) {
-            throw new IllegalArgumentException(String.format("length should be 3, input: [%d]", str.length()));
-        }
+        validateLength(str);
         return new Game(str);
+    }
+
+    private static void validateLength(String str) {
+        if (isValidLength(str))
+            throw new IllegalArgumentException(String.format("length should be 3, input: [%d]", str.length()));
+    }
+
+    private static boolean isValidLength(String str) {
+        return str.length() != GAME_LENGTH;
     }
 
 }
