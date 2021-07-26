@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class NumberTest {
 
@@ -12,5 +13,13 @@ public class NumberTest {
     void ofString() {
         Number number = Number.of("1");
         assertThat(number).isNotNull();
+    }
+
+    @DisplayName("1-9 숫자가 아니면 Exception이 발생한다.")
+    @Test
+    void invalidNumber() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Number.of("0"));
+        assertThatIllegalArgumentException().isThrownBy(() -> Number.of("#"));
+        assertThatIllegalArgumentException().isThrownBy(() -> Number.of("10"));
     }
 }
