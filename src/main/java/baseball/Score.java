@@ -3,6 +3,7 @@ package baseball;
 import java.util.Objects;
 
 public class Score {
+    // TODO: 필드가 많다.
     public static final int MIN_STRIKE_AND_BALL = 0;
     public static final int MAX_STRIKE_AND_BALL = 3;
     public static final String STRIKE_BALL_RANGE_EXCEPTION_STR = "strike, ball range 0-3, input: [%d, %d]";

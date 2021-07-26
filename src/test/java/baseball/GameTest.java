@@ -1,17 +1,25 @@
 package baseball;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static baseball.Game.of;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class GameTest {
+
+    private Game game;
+
+    @BeforeEach
+    void setup() {
+        this.game = of("123");
+    }
 
     @DisplayName("세자리 숫자를 받아 게임을 생성")
     @Test
     public void createGame() {
-        Game game = of("123");
         assertThat(game).isNotNull();
     }
 
@@ -21,7 +29,7 @@ public class GameTest {
         assertIllegalArgumentException("1234");
         assertIllegalArgumentException("23");
     }
-    
+
     @DisplayName("숫자, 범위는 1~9")
     @Test
     void invalidNumber() {
@@ -37,27 +45,27 @@ public class GameTest {
     @DisplayName("숫자가 일치하지 않으면 nothing")
     @Test
     void nothing() {
-        Game game = of("123");
-        Score score = game.compare("456");
-        assertThat(score).isEqualTo(new Score(0, 0));
+        sameScore("456", 0, 0);
     }
 
     @DisplayName("숫자와 자리가 일치하면 strike")
     @Test
     void sameNumberAndSamePositionIsStrike() {
-        Game game = of("123");
-        assertThat(game.compare("123")).isEqualTo(new Score(3, 0));
-        assertThat(game.compare("143")).isEqualTo(new Score(2, 0));
-        assertThat(game.compare("425")).isEqualTo(new Score(1, 0));
+        sameScore("123", 3, 0);
+        sameScore("143", 2, 0);
+        sameScore("425", 1, 0);
     }
 
     @DisplayName("숫자가 일치하고 자리가 일치하지 않으면 ball")
     @Test
     void sameNumberAndDiffPositionIsBall() {
-        Game game = of("123");
-        assertThat(game.compare("312")).isEqualTo(new Score(0, 3));
-        assertThat(game.compare("241")).isEqualTo(new Score(0, 2));
-        assertThat(game.compare("435")).isEqualTo(new Score(0, 1));
+        sameScore("312", 0, 3);
+        sameScore("241", 0, 2);
+        sameScore("435", 0, 1);
+    }
+
+    private void sameScore(String target, int strike, int ball) {
+        assertThat(game.compare(target)).isEqualTo(new Score(strike, ball));
     }
 
 }

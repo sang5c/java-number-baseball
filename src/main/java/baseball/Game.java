@@ -1,12 +1,14 @@
 package baseball;
 
 public class Game {
+    // TODO: 필드가 많다.
     public static final int GAME_LENGTH = 3;
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 9;
     public static final String SPLIT_REGEX = "";
     public static final String OUT_OF_RANGE_STR = "range should be 1-9, input: [%s]";
     public static final String INVALID_LENGTH_STR = "length should be 3, input: [%d]";
+    public static final String NUMBER_SPLIT_REGEX = "";
     private final String numbers;
 
     private Game(String numbers) {
@@ -46,23 +48,40 @@ public class Game {
         return str.length() != GAME_LENGTH;
     }
 
+    // TODO: 길고, 깊다.
     public Score compare(String targetNumbers) {
         int strike = 0;
         int ball = 0;
 
         String[] source = this.numbers.split("");
         for (int i = 0; i < source.length; i++) {
-            String[] target = targetNumbers.split("");
+            String[] target = targetNumbers.split(NUMBER_SPLIT_REGEX);
             for (int k = 0; k < target.length; k++) {
-                if (i == k && source[i].equals(target[k])) {
+                if (isStrike(source, i, target, k)) {
                     strike++;
                 }
-                if (i != k && source[i].equals(target[k])) {
+                if (isBall(source, i, target, k)) {
                     ball++;
                 }
             }
         }
         return new Score(strike, ball);
+    }
+
+    // TODO: 매개변수가 많다.
+    private boolean isStrike(String[] source, int i, String[] target, int k) {
+        return samePosition(i, k) && sameValue(source[i], target[k]);
+    }
+
+    private boolean isBall(String[] source, int i, String[] target, int k) {
+        return !samePosition(i, k) && sameValue(source[i], target[k]);
+    }
+    private boolean sameValue(String source, String target) {
+        return source.equals(target);
+    }
+
+    private boolean samePosition(int i, int k) {
+        return i == k;
     }
 
 }
