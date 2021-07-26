@@ -23,17 +23,24 @@ public class NumberTest {
         assertThatIllegalArgumentException().isThrownBy(() -> Number.of("10", 0));
     }
 
-    @DisplayName("숫자와 포지션이 같다면 같은 객체를 반환한다.")
+    @DisplayName("생성시 숫자와 포지션이 같다면 같은 객체를 반환한다.")
     @Test
     void equalsAndHashcode() {
         assertThat(Number.of("1", 0)).isEqualTo(Number.of("1", 0));
     }
 
-    @DisplayName("숫자나 포지션이 다르면 다른 객체를 반환한다.")
+    @DisplayName("생성시 숫자나 포지션이 다르면 다른 객체를 반환한다.")
     @Test
     void notEqualsDiffValueOrDiffPosition() {
         assertThat(Number.of("1", 0)).isNotEqualTo(Number.of("1", 1));
         assertThat(Number.of("1", 0)).isNotEqualTo(Number.of("2", 0));
+    }
+
+    @DisplayName("비교시 숫자와 포지션이 같으면 STRIKE를 반환한다.")
+    @Test
+    void compareReturnStrike() {
+        Number number = Number.of("1", 0);
+        assertThat(number.compare(Number.of("1", 0))).isEqualTo(Judgment.STRIKE);
     }
 
 }
