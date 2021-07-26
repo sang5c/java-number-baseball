@@ -23,7 +23,6 @@ public class GameTest {
     @DisplayName("숫자, 범위는 1~9")
     @Test
     void invalidNumber() {
-        Game.of("12#");
         assertThatIllegalArgumentException().isThrownBy(() -> Game.of("023"));
         assertThatIllegalArgumentException().isThrownBy(() -> Game.of("12#"));
         assertThatIllegalArgumentException().isThrownBy(() -> Game.of("1A3"));
