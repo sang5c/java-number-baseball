@@ -28,4 +28,12 @@ public class NumberTest {
     void equalsAndHashcode() {
         assertThat(Number.of("1", 0)).isEqualTo(Number.of("1", 0));
     }
+
+    @DisplayName("숫자나 포지션이 다르면 다른 객체를 반환한다.")
+    @Test
+    void notEqualsDiffValueOrDiffPosition() {
+        assertThat(Number.of("1", 0)).isNotEqualTo(Number.of("1", 1));
+        assertThat(Number.of("1", 0)).isNotEqualTo(Number.of("2", 0));
+    }
+
 }
