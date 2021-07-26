@@ -6,11 +6,10 @@ public class Score {
     // TODO: 필드가 많다.
     private static final int MIN_STRIKE_AND_BALL = 0;
     private static final int MAX_STRIKE_AND_BALL = 3;
-    private static final int MAX_SUM_OF_STRIKE_AND_BALL = 3;
     private static final String STRIKE_BALL_RANGE_EXCEPTION_STR = "strike, ball range 0-3, input: [%d, %d]";
     private static final String STRIKE_BALL_SUM_EXCEPTION_STR = "sum of strike and ball up to 3, input: [%d]";
-    private int strike;
-    private int ball;
+    private final int strike;
+    private final int ball;
 
     public Score(int strike, int ball) {
         validateStrikeAndBall(strike, ball);
@@ -22,13 +21,23 @@ public class Score {
         if (isValidRange(strike) || isValidRange(ball)) {
             throw new IllegalArgumentException(String.format(STRIKE_BALL_RANGE_EXCEPTION_STR, strike, ball));
         }
-        if (strike + ball > MAX_SUM_OF_STRIKE_AND_BALL) {
+        if (strike + ball > Game.NUMBERS_LENGTH) {
             throw new IllegalArgumentException(String.format(STRIKE_BALL_SUM_EXCEPTION_STR, strike + ball));
         }
     }
 
     private boolean isValidRange(int value) {
         return value > MAX_STRIKE_AND_BALL || value < MIN_STRIKE_AND_BALL;
+    }
+
+    public Score increaseCount(Judgment judgment) {
+        if (judgment == Judgment.STRIKE) {
+            return new Score(strike + 1, ball);
+        }
+        if (judgment == Judgment.BALL) {
+            return new Score(strike, ball + 1);
+        }
+        return this;
     }
 
     @Override

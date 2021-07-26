@@ -27,8 +27,9 @@ public class Number {
         if (this.equals(target)) {
             return Judgment.STRIKE;
         }
-        if (this.number == target.number)
+        if (this.number == target.number) {
             return Judgment.BALL;
+        }
         return Judgment.NOTHING;
     }
 
