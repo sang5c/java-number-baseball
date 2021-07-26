@@ -35,6 +35,12 @@ class ScoreTest {
         assertIllegalArgumentException(0, 4);
         assertIllegalArgumentException(0, -1);
     }
+    
+    @DisplayName("볼과 스트라이크의 합은 최대 3이다.")
+    @Test
+    void sumOfBallAndStrikeUpToThree() {
+        assertIllegalArgumentException(2, 2);
+    }
 
     private void assertIllegalArgumentException(int strike, int ball) {
         assertThatIllegalArgumentException().isThrownBy(() -> new Score(strike, ball));
