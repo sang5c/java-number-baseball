@@ -23,8 +23,8 @@ public class Number {
         return new Number(number, position);
     }
 
-    public boolean compare(Number target) {
-        return false;
+    public Judgment compare(Number target) {
+        return Judgment.STRIKE;
     }
 
     @Override
