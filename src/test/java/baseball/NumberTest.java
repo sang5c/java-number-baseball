@@ -49,4 +49,11 @@ public class NumberTest {
         Number number = Number.of("1", 0);
         assertThat(number.compare(Number.of("1", 1))).isEqualTo(Judgment.BALL);
     }
+
+    @DisplayName("비교시 숫자와 포지션이 다르면 NOTHING을 반환한다.")
+    @Test
+    void compareReturnNothing() {
+        Number number = Number.of("1", 0);
+        assertThat(number.compare(Number.of("1", 1))).isEqualTo(Judgment.NOTHING);
+    }
 }
