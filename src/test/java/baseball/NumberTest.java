@@ -56,4 +56,5 @@ public class NumberTest {
         Number number = Number.of("1", 0);
         assertThat(number.compare(Number.of("2", 1))).isEqualTo(Judgment.NOTHING);
     }
+
 }

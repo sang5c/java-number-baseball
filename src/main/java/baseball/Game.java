@@ -26,8 +26,8 @@ public class Game {
     private static List<Number> convertToNumbers(String str) {
         List<Number> numbers = new ArrayList<>();
         String[] split = str.split(NUMBER_SPLIT_REGEX);
-        for (String s : split) {
-            numbers.add(Number.of(s, 0));
+        for (int i = 0; i < split.length; i++) {
+            numbers.add(Number.of(split[i], i));
         }
         return Collections.unmodifiableList(numbers);
     }
@@ -37,17 +37,17 @@ public class Game {
     }
 
     // TODO: 길고, 깊다.
-    public Score compare(String targetNumbers) {
+    public Score compare(String str) {
         int strike = 0;
         int ball = 0;
 
-        for (int i = 0; i < this.numbers.size(); i++) {
-            List<Number> target = convertToNumbers(targetNumbers);
-            for (int k = 0; k < target.size(); k++) {
-                if (isStrike(this.numbers.get(i), i, target.get(k), k)) {
+        for (Number source : this.numbers) {
+            List<Number> targetNumbers = convertToNumbers(str);
+            for (Number target : targetNumbers) {
+                if (isStrike(source, target)) {
                     strike++;
                 }
-                if (isBall(this.numbers.get(i), i, target.get(k), k)) {
+                if (isBall(source, target)) {
                     ball++;
                 }
             }
@@ -55,21 +55,12 @@ public class Game {
         return new Score(strike, ball);
     }
 
-    // TODO: 매개변수가 많다.
-    private boolean isStrike(Number source, int i, Number target, int k) {
-        return samePosition(i, k) && sameValue(source, target);
+    private boolean isStrike(Number source, Number target) {
+        return source.compare(target) == Judgment.STRIKE;
     }
 
-    private boolean isBall(Number source, int i, Number target, int k) {
-        return !samePosition(i, k) && sameValue(source, target);
-    }
-
-    private boolean sameValue(Number source, Number target) {
-        return source.equals(target);
-    }
-
-    private boolean samePosition(int i, int k) {
-        return i == k;
+    private boolean isBall(Number source, Number target) {
+        return source.compare(target) == Judgment.BALL;
     }
 
 }
