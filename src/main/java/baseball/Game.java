@@ -38,7 +38,7 @@ public class Game {
 
     // TODO: 길고, 깊다.
     public Score compare(String str) {
-        Score score = new Score(0, 0);
+        Score score = Score.of(0, 0);
         for (Number source : this.numbers) {
             List<Number> targetNumbers = convertToNumbers(str);
             for (Number target : targetNumbers) {

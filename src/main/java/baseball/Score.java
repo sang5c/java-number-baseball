@@ -3,39 +3,36 @@ package baseball;
 import java.util.Objects;
 
 public class Score {
-    // TODO: 필드가 많다.
-    private static final int MIN_STRIKE_AND_BALL = 0;
-    private static final int MAX_STRIKE_AND_BALL = 3;
-    private static final String STRIKE_BALL_RANGE_EXCEPTION_STR = "strike, ball range 0-3, input: [%d, %d]";
     private static final String STRIKE_BALL_SUM_EXCEPTION_STR = "sum of strike and ball up to 3, input: [%d]";
-    private final int strike;
-    private final int ball;
+    private final Count strike;
+    private final Count ball;
 
-    public Score(int strike, int ball) {
-        validateStrikeAndBall(strike, ball);
+    private Score(Count strike, Count ball) {
         this.strike = strike;
         this.ball = ball;
     }
 
-    private void validateStrikeAndBall(int strike, int ball) {
-        if (isValidRange(strike) || isValidRange(ball)) {
-            throw new IllegalArgumentException(String.format(STRIKE_BALL_RANGE_EXCEPTION_STR, strike, ball));
-        }
+    public static Score of(int strike, int ball) {
+        validateStrikeAndBall(strike, ball);
+        return new Score(new Count(strike), new Count(ball));
+    }
+
+    public static Score zero() {
+        return new Score(new Count(0), new Count(0));
+    }
+
+    private static void validateStrikeAndBall(int strike, int ball) {
         if (strike + ball > Game.NUMBERS_LENGTH) {
             throw new IllegalArgumentException(String.format(STRIKE_BALL_SUM_EXCEPTION_STR, strike + ball));
         }
     }
 
-    private boolean isValidRange(int value) {
-        return value > MAX_STRIKE_AND_BALL || value < MIN_STRIKE_AND_BALL;
-    }
-
     public Score increaseCount(Judgment judgment) {
         if (judgment == Judgment.STRIKE) {
-            return new Score(strike + 1, ball);
+            return new Score(strike.increase(), ball);
         }
         if (judgment == Judgment.BALL) {
-            return new Score(strike, ball + 1);
+            return new Score(strike, ball.increase());
         }
         return this;
     }

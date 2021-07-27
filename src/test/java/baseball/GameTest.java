@@ -65,7 +65,7 @@ public class GameTest {
     }
 
     private void sameScore(String target, int strike, int ball) {
-        assertThat(game.compare(target)).isEqualTo(new Score(strike, ball));
+        assertThat(game.compare(target)).isEqualTo(Score.of(strike, ball));
     }
 
 }

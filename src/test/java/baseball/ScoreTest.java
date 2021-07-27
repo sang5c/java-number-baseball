@@ -11,39 +11,39 @@ class ScoreTest {
     @DisplayName("스트라이크와 볼을 받아 객체를 생성한다.")
     @Test
     void createScore() {
-        Score score = new Score(1, 2);
+        Score score = Score.of(1, 2);
         assertThat(score).isNotNull();
     }
 
     @DisplayName("스트라이크와 볼이 같다면 같은 객체를 반환한다")
     @Test
     void equalsAndHashcode() {
-        Score score = new Score(1, 2);
-        assertThat(score).isEqualTo(new Score(1, 2));
+        Score score = Score.of(1, 2);
+        assertThat(score).isEqualTo(Score.of(1, 2));
     }
 
     @DisplayName("STRIKE를 받으면 스트라이크 카운트가 증가한다.")
     @Test
     void increaseStrikeCount() {
-        Score score = new Score(0, 1);
+        Score score = Score.of(0, 1);
         score = score.increaseCount(Judgment.STRIKE);
-        assertThat(score).isEqualTo(new Score(1, 1));
+        assertThat(score).isEqualTo(Score.of(1, 1));
     }
 
     @DisplayName("BALL을 받으면 볼 카운트가 증가한다.")
     @Test
     void increaseBallCount() {
-        Score score = new Score(0, 1);
+        Score score = Score.of(0, 1);
         score = score.increaseCount(Judgment.BALL);
-        assertThat(score).isEqualTo(new Score(0, 2));
+        assertThat(score).isEqualTo(Score.of(0, 2));
     }
 
     @DisplayName("NOTHING을 받으면 카운트가 증가하지 않는다.")
     @Test
     void notIncreaseCount() {
-        Score score = new Score(0, 1);
+        Score score = Score.of(0, 1);
         score = score.increaseCount(Judgment.NOTHING);
-        assertThat(score).isEqualTo(new Score(0, 1));
+        assertThat(score).isEqualTo(Score.of(0, 1));
     }
 
     @DisplayName("스트라이크는 0-3 숫자가 아니면 Exception이 발생한다.")
@@ -67,7 +67,7 @@ class ScoreTest {
     }
 
     private void assertIllegalArgumentException(int strike, int ball) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Score(strike, ball));
+        assertThatIllegalArgumentException().isThrownBy(() -> Score.of(strike, ball));
     }
 
 }
