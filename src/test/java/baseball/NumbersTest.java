@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class NumbersTest {
 
@@ -12,6 +13,13 @@ public class NumbersTest {
     void create() {
         Numbers numbers = Numbers.of("123");
         assertThat(numbers).isNotNull();
+    }
+
+    @DisplayName("길이가 3이 아니면 Exception")
+    @Test
+    void invalidLengthThrowException() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Numbers.of("1234"));
+        assertThatIllegalArgumentException().isThrownBy(() -> Numbers.of("12"));
     }
 
 }
