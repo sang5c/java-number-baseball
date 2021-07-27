@@ -1,5 +1,7 @@
 package baseball;
 
+import java.util.Objects;
+
 public class Count {
     private static final int MIN_COUNT = 0;
     private static final int MAX_COUNT = 3;
@@ -20,6 +22,19 @@ public class Count {
 
     public Count increase() {
         return new Count(this.count + 1);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Count count1 = (Count) o;
+        return count == count1.count;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(count);
     }
 
 }
